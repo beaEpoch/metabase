@@ -8,7 +8,6 @@ import { DatabaseListLoader } from "metabase/components/BrowseApp";
 
 import * as Urls from "metabase/lib/urls";
 import { normal } from "metabase/lib/colors";
-import { withBackground } from "metabase/hoc/Background";
 
 import Card from "metabase/components/Card";
 import { Grid, GridItem } from "metabase/components/Grid";
@@ -25,7 +24,6 @@ const mapStateToProps = state => ({
 
 //class Overworld extends Zelda
 @connect(mapStateToProps)
-@withBackground("bg-slate-extra-light")
 class Overworld extends React.Component {
   render() {
     return (
@@ -36,7 +34,7 @@ class Overworld extends React.Component {
         <Box mt={3} mb={1}>
           <h4>{t`Pinned dashboards`}</h4>
         </Box>
-        <CollectionItemsLoader collectionId="root">
+        <CollectionItemsLoader collectionId="root" reload>
           {({ dashboards }) => {
             let pinnedDashboards = dashboards.filter(
               d => d.collection_position,

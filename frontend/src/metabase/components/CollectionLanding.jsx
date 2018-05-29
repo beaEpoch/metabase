@@ -3,7 +3,6 @@ import { Box, Flex, Subhead, Truncate } from "rebass";
 import { t } from "c-3po";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
-import { withBackground } from "metabase/hoc/Background";
 
 import Question from "metabase/entities/questions";
 import Dashboard from "metabase/entities/dashboards";
@@ -161,7 +160,7 @@ class DefaultLanding extends React.Component {
         )}
         <Box w={2 / 3}>
           <Box>
-            <CollectionItemsLoader collectionId={collectionId || "root"}>
+            <CollectionItemsLoader reload collectionId={collectionId || "root"}>
               {({ collection, allItems, pulses, cards, dashboards, empty }) => {
                 let items = allItems;
 
@@ -288,7 +287,6 @@ class DefaultLanding extends React.Component {
 }
 
 @connect(mapStateToProps)
-@withBackground("bg-slate-extra-light")
 class CollectionLanding extends React.Component {
   render() {
     const { params, currentCollection } = this.props;
