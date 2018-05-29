@@ -314,70 +314,76 @@ class CollectionLanding extends React.Component {
             </Subhead>
 
             <Flex ml="auto">
-              <Box mx={1}>
+              {currentCollection.can_write && (
+                <Box ml={1}>
+                  <EntityMenu
+                    items={[
+                      {
+                        title: t`New dashboard`,
+                        icon: "dashboard",
+                        link: `/questions/archive/`,
+                      },
+                      {
+                        title: t`New pulse`,
+                        icon: "pulse",
+                        link: `/dashboards/archive`,
+                      },
+                      {
+                        title: t`New collection`,
+                        icon: "all",
+                        link: `/dashboards/archive`,
+                      },
+                    ]}
+                    triggerIcon="add"
+                  />
+                </Box>
+              )}
+              {currentCollection.can_write && (
+                <Box ml={1}>
+                  <EntityMenu
+                    items={[
+                      ...(collectionId
+                        ? [
+                            {
+                              title: t`Edit this collection`,
+                              icon: "editdocument",
+                              link: `/collections/${currentCollection.id}`,
+                            },
+                          ]
+                        : []),
+                      {
+                        title: t`Edit permissions`,
+                        icon: "lock",
+                        link: `/collections/permissions?collectionId=${
+                          currentCollection.id
+                        }`,
+                      },
+                      ...(collectionId
+                        ? [
+                            {
+                              title: t`Archive this collection`,
+                              icon: "viewArchive",
+                              link: `/collection/${collectionId}/archive`,
+                            },
+                          ]
+                        : []),
+                    ]}
+                    triggerIcon="pencil"
+                  />
+                </Box>
+              )}
+              <Box ml={1}>
                 <EntityMenu
                   items={[
                     {
-                      title: t`New dashboard`,
-                      icon: "dashboard",
-                      link: `/questions/archive/`,
-                    },
-                    {
-                      title: t`New pulse`,
-                      icon: "pulse",
-                      link: `/dashboards/archive`,
-                    },
-                    {
-                      title: t`New collection`,
-                      icon: "all",
-                      link: `/dashboards/archive`,
+                      title: t`View the archive`,
+                      icon: "viewArchive",
+                      link: `/archive`,
                     },
                   ]}
-                  triggerIcon="add"
+                  triggerIcon="burger"
                 />
               </Box>
-              <Box mx={1}>
-                <EntityMenu
-                  items={[
-                    ...(collectionId
-                      ? [
-                          {
-                            title: t`Edit this collection`,
-                            icon: "editdocument",
-                            link: `/collections/${currentCollection.id}`,
-                          },
-                        ]
-                      : []),
-                    {
-                      title: t`Edit permissions`,
-                      icon: "lock",
-                      link: `/collections/permissions?collectionId=${
-                        currentCollection.id
-                      }`,
-                    },
-                    ...(collectionId
-                      ? [
-                          {
-                            title: t`Archive this collection`,
-                            icon: "viewArchive",
-                            link: `/collection/${collectionId}/archive`,
-                          },
-                        ]
-                      : []),
-                  ]}
-                  triggerIcon="pencil"
-                />
-              </Box>
-              <EntityMenu
-                items={[
-                  {
-                    title: t`View the archive`,
-                    icon: "viewArchive",
-                    link: `/archive`,
-                  },
-                ]}
-                triggerIcon="burger"
-              />
             </Flex>
           </Flex>
         </Box>
